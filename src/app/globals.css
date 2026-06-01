@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0B0E13;
+  --ink-2: #0E131A;
+  --surface: #141C26;
+  --line: rgba(233, 237, 242, 0.10);
+  --line-strong: rgba(233, 237, 242, 0.20);
+  --fg: #E9EDF2;
+  --fg-dim: #9BA7B4;
+  --fg-faint: #5F6B78;
+  --signal: #EFA73C;
+  --steel: #6E8BA8;
+  /* light environment */
+  --canvas: #F3F5F7;
+  --graphite: #0F1620;
+  --graphite-dim: #465261;
+  --mute: rgba(15, 22, 32, 0.10);
+  --mute-strong: rgba(15, 22, 32, 0.18);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--ink);
+  color: var(--fg);
+  font-feature-settings: "ss01", "cv01";
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--signal); color: #0B0E13; }
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: #232c38; border: 2px solid var(--ink); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #2e3a48; }
+
+/* ----- Atmospheric backgrounds (dark) ----- */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.bg-vignette {
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 80%);
+}
+.bg-dots {
+  background-image: radial-gradient(var(--line-strong) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.glow-signal {
+  background: radial-gradient(closest-side, rgba(239, 167, 60, 0.18), transparent 70%);
+}
+
+/* ----- Atmospheric backgrounds (light) ----- */
+.bg-grid-light {
+  background-image:
+    linear-gradient(to right, var(--mute) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--mute) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.bg-dots-light {
+  background-image: radial-gradient(var(--mute-strong) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.hairline { height: 1px; background: var(--line); }
+
+/* ----- Scroll reveal ----- */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* ----- Signal flow on SVG diagram paths: single pass on entry ----- */
+.flow-line {
+  stroke-dasharray: 6 220;
+  stroke-dashoffset: 226;
+}
+.flow-line.is-active {
+  animation: dash 2.6s linear forwards;
+}
+@keyframes dash { to { stroke-dashoffset: 0; } }
+
+.diagram-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.diagram-draw.is-active {
+  animation: draw-in 1.2s ease forwards;
+}
+@keyframes draw-in { to { stroke-dashoffset: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .flow-line { animation: none; opacity: 0; }
+  .diagram-draw { animation: none; stroke-dashoffset: 0; }
+}
+
+/* Typographic helpers */
+.kicker {
+  font-family: var(--font-mono, "IBM Plex Mono"), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+.kicker-dark { color: var(--graphite-faint, #7B8694); }
+
+.display-balance { text-wrap: balance; }
+h1, h2, h3, h4 { text-wrap: balance; }
+
+/* Engineering-paper article body for resources */
+.prose-tech { color: var(--graphite-dim); line-height: 1.75; }
+.prose-tech h2 { color: var(--graphite); }
+.prose-tech h3 { color: var(--graphite); }
+.prose-tech strong { color: var(--graphite); }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+}

@@ -1,0 +1,12 @@
+/node_modules
+/.next
+/out
+/build
+.DS_Store
+*.pem
+.env*.local
+.vercel
+npm-debug.log*
+
+# Local Claude Code settings
+.claude/settings.local.json
