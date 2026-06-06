@@ -22,9 +22,9 @@ module.exports = {
         steel: { DEFAULT: "#6E8BA8", dim: "#48586a", light: "#5A6B7E" },
       },
       fontFamily: {
-        display: ["Archivo", "system-ui", "sans-serif"],
-        sans: ["\"IBM Plex Sans\"", "system-ui", "sans-serif"],
-        mono: ["\"IBM Plex Mono\"", "ui-monospace", "monospace"],
+        display: ["Inter", "system-ui", "sans-serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        mono: ["\"JetBrains Mono\"", "ui-monospace", "monospace"],
       },
       letterSpacing: { tightest: "-0.04em", kicker: "0.22em" },
       maxWidth: { site: "1280px", prose: "44rem" },

@@ -111,7 +111,7 @@ Fonts are loaded via `<link>` to Google Fonts in `src/app/layout.js`, with
 access to Google Fonts during the build; this build environment blocks that
 domain, so the `<link>` approach is retained to keep the build reproducible
 here. In an unrestricted build environment, migrate to `next/font/google`
-(Archivo, IBM Plex Sans, IBM Plex Mono) for the final performance gain — this is
+(Inter, JetBrains Mono) for the final performance gain — this is
 the single outstanding performance item.
 
 ---

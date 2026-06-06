@@ -44,10 +44,11 @@ body {
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 10px; height: 10px; }
+html { scrollbar-color: #4a5a6e var(--ink); scrollbar-width: thin; }
+::-webkit-scrollbar { width: 12px; height: 12px; }
 ::-webkit-scrollbar-track { background: var(--ink); }
-::-webkit-scrollbar-thumb { background: #232c38; border: 2px solid var(--ink); border-radius: 8px; }
-::-webkit-scrollbar-thumb:hover { background: #2e3a48; }
+::-webkit-scrollbar-thumb { background: #4a5a6e; border: 2px solid var(--ink); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #6e8ba8; }
 
 /* ----- Atmospheric backgrounds (dark) ----- */
 .bg-grid {
@@ -98,7 +99,7 @@ body {
   stroke-dashoffset: 226;
 }
 .flow-line.is-active {
-  animation: dash 2.6s linear forwards;
+  animation: dash 2.6s linear infinite;
 }
 @keyframes dash { to { stroke-dashoffset: 0; } }
 
@@ -120,7 +121,7 @@ body {
 
 /* Typographic helpers */
 .kicker {
-  font-family: var(--font-mono, "IBM Plex Mono"), monospace;
+  font-family: var(--font-mono, "JetBrains Mono"), monospace;
   font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
