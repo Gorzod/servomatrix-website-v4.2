@@ -7,8 +7,9 @@ import { projectStatusLabels } from "@/lib/projects";
 export function SolutionCard({ solution, index = 0 }) {
   return (
     <Reveal
+      lift
       delay={(index % 3) * 70}
-      className="group flex h-full flex-col rounded-xl border border-mute bg-paper p-6 transition-all duration-300 hover:border-mute-strong hover:shadow-[0_18px_50px_-30px_rgba(15,22,32,0.35)]"
+      className="group relative flex h-full flex-col rounded-xl border border-mute bg-paper p-6 shadow-card-light transition-[box-shadow,border-color] duration-300 ease-premium hover:border-mute-strong hover:shadow-card-light-hover"
     >
       <div className="flex items-center justify-between">
         <span className="font-mono text-xs tracking-widest text-graphite-faint">{solution.index}</span>
@@ -55,11 +56,12 @@ export function SectorCard({ industry, index = 0, tone = "light" }) {
   const dark = tone === "dark";
   return (
     <Reveal
+      lift
       delay={(index % 2) * 80}
-      className={`group flex h-full flex-col rounded-xl border p-6 transition-all duration-300 ${
+      className={`group relative flex h-full flex-col rounded-xl border p-6 transition-[box-shadow,border-color,background-color] duration-300 ease-premium ${
         dark
-          ? "border-line bg-surface/50 hover:border-line-strong hover:bg-surface"
-          : "border-mute bg-paper hover:border-mute-strong hover:shadow-[0_18px_50px_-30px_rgba(15,22,32,0.35)]"
+          ? "border-line bg-surface/50 hover:border-line-strong hover:bg-surface hover:shadow-elev-dark-hover"
+          : "border-mute bg-paper shadow-card-light hover:border-mute-strong hover:shadow-card-light-hover"
       }`}
     >
       <h3 className={`font-display text-lg font-semibold tracking-tight ${dark ? "text-fg" : "text-graphite"}`}>
@@ -106,8 +108,9 @@ export function ProjectEvidenceCard({ project, index = 0 }) {
   const isRep = project.status === "representative";
   return (
     <Reveal
+      lift
       delay={(index % 3) * 70}
-      className="group flex h-full flex-col rounded-xl border border-mute bg-paper p-6 transition-all duration-300 hover:border-mute-strong hover:shadow-[0_18px_50px_-30px_rgba(15,22,32,0.35)]"
+      className="group relative flex h-full flex-col rounded-xl border border-mute bg-paper p-6 shadow-card-light transition-[box-shadow,border-color] duration-300 ease-premium hover:border-mute-strong hover:shadow-card-light-hover"
     >
       <div className="flex items-center gap-2">
         <span
@@ -152,9 +155,10 @@ export function DeliverableCard({ deliverable, visual, index = 0, tone = "light"
   const dark = tone === "dark";
   return (
     <Reveal
+      lift
       delay={(index % 3) * 60}
-      className={`flex h-full flex-col rounded-xl border p-5 ${
-        dark ? "border-line bg-ink-2" : "border-mute bg-paper"
+      className={`group flex h-full flex-col rounded-xl border p-5 transition-[box-shadow,border-color] duration-300 ease-premium ${
+        dark ? "border-line bg-ink-2 hover:border-line-strong" : "border-mute bg-paper shadow-card-light hover:border-mute-strong hover:shadow-card-light-hover"
       }`}
     >
       {visual && <div className="mb-4">{visual}</div>}
@@ -173,10 +177,13 @@ export function TrustAssuranceBlock({ block, index = 0, tone = "dark" }) {
   const dark = tone === "dark";
   return (
     <Reveal
+      lift
       delay={(index % 2) * 70}
-      className={`relative rounded-xl border p-6 ${dark ? "border-line bg-ink-2" : "border-mute bg-paper"}`}
+      className={`group relative overflow-hidden rounded-xl border p-6 transition-[box-shadow,border-color] duration-300 ease-premium ${
+        dark ? "border-line bg-ink-2 hover:border-line-strong" : "border-mute bg-paper shadow-card-light hover:border-mute-strong hover:shadow-card-light-hover"
+      }`}
     >
-      <span className="absolute left-0 top-6 h-8 w-px bg-signal" aria-hidden="true" />
+      <span className="absolute left-0 top-6 h-8 w-0.5 rounded-full bg-signal shadow-signal-glow transition-all duration-300 ease-premium group-hover:h-12" aria-hidden="true" />
       <h3 className={`pl-4 font-display text-lg font-semibold tracking-tight ${dark ? "text-fg" : "text-graphite"}`}>
         {block.title}
       </h3>
@@ -191,8 +198,9 @@ export function TrustAssuranceBlock({ block, index = 0, tone = "dark" }) {
 export function ResourceCard({ resource, index = 0 }) {
   return (
     <Reveal
+      lift
       delay={(index % 3) * 70}
-      className="group flex h-full flex-col rounded-xl border border-mute bg-paper p-6 transition-all duration-300 hover:border-mute-strong hover:shadow-[0_18px_50px_-30px_rgba(15,22,32,0.35)]"
+      className="group relative flex h-full flex-col rounded-xl border border-mute bg-paper p-6 shadow-card-light transition-[box-shadow,border-color] duration-300 ease-premium hover:border-mute-strong hover:shadow-card-light-hover"
     >
       <div className="flex items-center justify-between">
         <span className="rounded border border-mute bg-canvas px-2 py-0.5 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-graphite-faint">

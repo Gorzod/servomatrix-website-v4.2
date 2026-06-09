@@ -6,8 +6,10 @@ import { primaryCta, secondaryCta, site } from "@/lib/site";
 // ---- Inner-page hero (dark) ----
 export function PageHero({ kicker, title, lead, breadcrumbs, children }) {
   return (
-    <section className="relative overflow-hidden border-b border-line bg-ink pt-28 pb-14 sm:pt-36 sm:pb-18">
+    <section className="grain relative overflow-hidden border-b border-line bg-ink pt-28 pb-14 sm:pt-36 sm:pb-18">
+      <div className="pointer-events-none absolute inset-0 bg-hero-mesh" aria-hidden="true" />
       <div className="pointer-events-none absolute inset-0 bg-grid bg-vignette opacity-50" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px hairline-gradient" aria-hidden="true" />
       <Container className="relative">
         {breadcrumbs && (
           <Reveal className="mb-7">
@@ -39,9 +41,10 @@ export function CTABanner({
   body = "Send the available drawings, specifications, points schedule or project brief. We will review the control requirements and identify the most practical next step.",
 }) {
   return (
-    <section className="relative overflow-hidden border-y border-line bg-ink-2 py-20 sm:py-24">
+    <section className="grain relative overflow-hidden border-y border-line bg-ink-2 py-20 sm:py-24">
       <div className="pointer-events-none absolute inset-0 bg-dots opacity-[0.4]" aria-hidden="true" />
-      <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 glow-signal opacity-60" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px hairline-signal" aria-hidden="true" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 glow-signal opacity-70" aria-hidden="true" />
       <Container className="relative text-center">
         <Reveal>
           <h2 className="mx-auto max-w-3xl font-display text-3xl font-semibold leading-tight tracking-tightest sm:text-4xl md:text-[2.7rem]">
@@ -71,21 +74,30 @@ export function CTABanner({
   );
 }
 
-// ---- Static protocol assurance bar (no motion) ----
+// ---- Looping protocol / capability marquee ----
 export function AssuranceBar({ tone = "dark" }) {
   const dark = tone === "dark";
+  const text = dark ? "text-fg-dim" : "text-graphite-dim";
   return (
     <div className={`border-y ${dark ? "border-line bg-ink-2" : "border-mute bg-canvas-2"}`}>
-      <Container className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 py-4">
-        {assuranceBar.map((item, i) => (
-          <span key={item} className="flex items-center gap-5">
-            <span className={`font-mono text-[0.78rem] tracking-wide ${dark ? "text-fg-dim" : "text-graphite-dim"}`}>{item}</span>
-            {i < assuranceBar.length - 1 && (
-              <span className="h-1 w-1 rounded-full bg-signal/70" aria-hidden="true" />
-            )}
-          </span>
+      {/* Static, ordered list for assistive technology */}
+      <ul className="sr-only" aria-label="Supported protocols and capabilities">
+        {assuranceBar.map((item) => (
+          <li key={item}>{item}</li>
         ))}
-      </Container>
+      </ul>
+
+      {/* Visual marquee — decorative duplicate, paused on hover and for reduced motion */}
+      <div aria-hidden="true" className="group marquee-mask relative flex overflow-hidden py-4">
+        <ul className="flex w-max shrink-0 items-center animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
+          {[...assuranceBar, ...assuranceBar].map((item, i) => (
+            <li key={i} className="flex items-center gap-9 pr-9">
+              <span className={`whitespace-nowrap font-mono text-[0.78rem] tracking-wide ${text}`}>{item}</span>
+              <span className="h-1 w-1 shrink-0 rounded-full bg-signal/70" />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

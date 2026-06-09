@@ -37,13 +37,31 @@ export const footerCatalogue = [
   { label: "Energy monitoring", href: "/services#energy" },
 ];
 
-// Static protocol assurance bar (replaces the looping marquee).
+// Looping protocol / capability marquee. Terms must stay consistent with the
+// capabilities the site actually claims (see lib/standards.js) — no protocols
+// or systems we don't list elsewhere.
 export const assuranceBar = [
   "BACnet/IP",
   "BACnet MS/TP",
   "Modbus TCP",
   "Modbus RTU",
+  "IP Networks",
   "DDC Controls",
+  "DDC Panel Engineering",
   "HVAC Integration",
+  "AHU Control",
+  "FCU Control",
+  "Chiller Plant",
+  "VRF / VRV Integration",
+  "Variable Speed Drives",
+  "Energy Monitoring",
+  "Trend Logging",
+  "Alarm Management",
+  "Scheduling",
+  "Operator Graphics",
+  "Points Schedules",
+  "Sequences of Operation",
   "Commissioning",
+  "Secure Remote Access",
+  "Lifecycle Support",
 ];

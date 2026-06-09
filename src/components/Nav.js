@@ -49,8 +49,10 @@ export default function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "border-b border-line bg-ink/85 backdrop-blur-md" : "border-b border-transparent bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-premium ${
+        scrolled
+          ? "border-b border-line/80 bg-ink/70 backdrop-blur-xl backdrop-saturate-150 shadow-elev-1"
+          : "border-b border-transparent bg-gradient-to-b from-ink/40 to-transparent"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-site items-center justify-between px-5 sm:px-8">
@@ -66,10 +68,15 @@ export default function Nav() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`relative text-sm tracking-tight transition-colors ${active ? "text-fg" : "text-fg-dim hover:text-fg"}`}
+                className={`group relative text-sm tracking-tight transition-colors duration-200 ${active ? "text-fg" : "text-fg-dim hover:text-fg"}`}
               >
                 {item.label}
-                {active && <span className="absolute -bottom-1.5 left-0 h-px w-full bg-signal" aria-hidden="true" />}
+                <span
+                  className={`absolute -bottom-1.5 left-0 h-px bg-gradient-to-r from-signal to-signal/40 transition-all duration-300 ease-premium ${
+                    active ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                  aria-hidden="true"
+                />
               </Link>
             );
           })}
@@ -78,10 +85,13 @@ export default function Nav() {
         <div className="hidden lg:block">
           <Link
             href={primaryCta.href}
-            className="inline-flex items-center gap-2 rounded-md bg-signal px-4 py-2 text-sm font-medium text-ink transition-all hover:-translate-y-[1px] hover:bg-[#f6b658]"
+            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-md bg-signal px-4 py-2 text-sm font-medium text-ink shadow-elev-1 transition-all duration-300 ease-premium hover:-translate-y-[2px] hover:shadow-signal-glow"
           >
-            {primaryCta.label}
-            <span aria-hidden="true">&rarr;</span>
+            <span className="absolute inset-0 bg-signal-sheen opacity-60 transition-opacity duration-300 group-hover:opacity-90" aria-hidden="true" />
+            <span className="relative z-10 inline-flex items-center gap-2">
+              {primaryCta.label}
+              <span className="transition-transform duration-300 ease-premium group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+            </span>
           </Link>
         </div>
 

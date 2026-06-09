@@ -3,14 +3,14 @@ import Link from "next/link";
 // Theme-aware button. tone="dark" (on dark bg) | "light" (on light bg).
 export function Button({ href, children, variant = "primary", tone = "dark", className = "", ...rest }) {
   const base =
-    "group inline-flex items-center justify-center gap-2 text-sm font-medium tracking-tight transition-all duration-200 select-none rounded-md px-5 py-3";
+    "group relative inline-flex items-center justify-center gap-2 text-sm font-medium tracking-tight transition-all duration-300 ease-premium select-none rounded-md px-5 py-3 overflow-hidden";
   const styles = {
     primary:
-      "bg-signal text-ink hover:bg-[#f6b658] hover:-translate-y-[1px] shadow-[0_1px_0_rgba(255,255,255,0.18)_inset]",
+      "bg-signal text-ink shadow-elev-1 hover:-translate-y-[2px] hover:shadow-signal-glow active:translate-y-0 before:absolute before:inset-0 before:bg-signal-sheen before:opacity-60 before:transition-opacity hover:before:opacity-90",
     secondary:
       tone === "light"
-        ? "border border-mute-strong text-graphite hover:border-signal-ink hover:text-signal-ink hover:-translate-y-[1px]"
-        : "border border-line-strong text-fg hover:border-signal hover:text-signal hover:-translate-y-[1px]",
+        ? "border border-mute-strong text-graphite hover:border-signal-ink hover:text-signal-ink hover:-translate-y-[2px] hover:shadow-card-light active:translate-y-0"
+        : "border border-line-strong text-fg hover:border-signal/70 hover:text-signal hover:-translate-y-[2px] hover:bg-fg/[0.03] active:translate-y-0",
     ghost:
       tone === "light"
         ? "px-1 py-1 text-graphite-dim hover:text-graphite"
@@ -18,15 +18,15 @@ export function Button({ href, children, variant = "primary", tone = "dark", cla
   };
   const cls = `${base} ${styles[variant]} ${className}`;
   const arrow = (
-    <span className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+    <span className="transition-transform duration-300 ease-premium group-hover:translate-x-1" aria-hidden="true">
       &rarr;
     </span>
   );
   const content = (
-    <>
+    <span className="relative z-10 inline-flex items-center gap-2">
       {children}
       {variant !== "ghost" && arrow}
-    </>
+    </span>
   );
   if (href) {
     return (
@@ -49,8 +49,11 @@ export function CTAGroup({ children, className = "" }) {
 // Mono micro-label. tone-aware.
 export function Kicker({ children, tone = "dark", className = "" }) {
   return (
-    <span className={`kicker inline-flex items-center gap-2 ${tone === "light" ? "kicker-dark" : ""} ${className}`}>
-      <span className="h-px w-6 bg-signal/70" aria-hidden="true" />
+    <span className={`kicker inline-flex items-center gap-2.5 ${tone === "light" ? "kicker-dark" : ""} ${className}`}>
+      <span className="inline-flex items-center gap-1" aria-hidden="true">
+        <span className="h-1.5 w-1.5 rounded-full bg-signal shadow-signal-glow" />
+        <span className="h-px w-6 bg-gradient-to-r from-signal/80 to-signal/0" />
+      </span>
       {children}
     </span>
   );
@@ -108,11 +111,11 @@ export function SectionHeader({ kicker, title, lead, tone = "dark", align = "lef
     <div className={`${align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"} ${className}`}>
       {kicker && <Kicker tone={tone}>{kicker}</Kicker>}
       {title && (
-        <h2 className="mt-5 font-display text-3xl font-semibold leading-[1.08] tracking-tightest sm:text-4xl">
+        <h2 className="mt-5 font-display text-[1.7rem] font-semibold leading-[1.08] tracking-tightest sm:text-4xl md:text-[2.55rem]">
           {title}
         </h2>
       )}
-      {lead && <p className={`mt-5 text-base leading-relaxed sm:text-lg ${dim}`}>{lead}</p>}
+      {lead && <p className={`mt-5 text-base leading-relaxed [text-wrap:pretty] sm:text-lg ${dim}`}>{lead}</p>}
     </div>
   );
 }

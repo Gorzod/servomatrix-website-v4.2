@@ -32,15 +32,23 @@ export default function Home() {
   return (
     <>
       {/* 1 — HERO */}
-      <DarkSection className="overflow-hidden border-b border-line pt-28 pb-16 sm:pt-36 sm:pb-20">
+      <DarkSection className="grain overflow-hidden border-b border-line pt-28 pb-16 sm:pt-36 sm:pb-20">
+        <div className="pointer-events-none absolute inset-0 bg-hero-mesh" aria-hidden="true" />
         <div className="pointer-events-none absolute inset-0 bg-grid bg-vignette opacity-50" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px hairline-gradient" aria-hidden="true" />
         <Container className="relative">
           <div className="grid items-center gap-14 lg:grid-cols-12">
             <div className="lg:col-span-6">
               <Reveal><Kicker>Building management systems · controls integration</Kicker></Reveal>
               <Reveal delay={80}>
-                <h1 className="mt-6 font-display text-4xl font-semibold leading-[1.05] tracking-tightest sm:text-5xl md:text-[3.3rem]">
-                  Building controls engineered for performance, clarity and long-term operation.
+                <h1 className="mt-6 flex flex-col items-start font-display font-bold uppercase leading-[1.06] tracking-[-0.02em] [container-type:inline-size]">
+                  <span className="whitespace-nowrap text-[clamp(1.2rem,7.5cqi,3.5rem)]">
+                    Intelligent buildings.
+                  </span>
+                  <span className="relative mt-1 whitespace-nowrap text-signal text-[clamp(1.2rem,7.5cqi,3.5rem)]">
+                    Absolute control.
+                    <span className="absolute -bottom-1 left-0 h-px w-full bg-gradient-to-r from-signal to-signal/0" aria-hidden="true" />
+                  </span>
                 </h1>
               </Reveal>
               <Reveal delay={150}>
@@ -64,7 +72,8 @@ export default function Home() {
             </div>
             <div className="lg:col-span-6">
               <Reveal delay={180} className="relative">
-                <div className="pointer-events-none absolute -inset-6 glow-signal opacity-40" aria-hidden="true" />
+                <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 glow-signal opacity-50" aria-hidden="true" />
+                <div className="pointer-events-none absolute -bottom-12 -left-12 h-56 w-56 glow-steel opacity-40" aria-hidden="true" />
                 <div className="relative">
                   <OperatorInterfaceVisual />
                 </div>
