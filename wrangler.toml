@@ -1,0 +1,9 @@
+# Cloudflare Workers Static Assets — serves the static export in ./out.
+# No Worker script (assets-only), no OpenNext, no SSR.
+name = "servomatrix-website"
+compatibility_date = "2025-01-01"
+
+[assets]
+directory = "./out"
+# Serve the custom 404 page for unknown paths.
+not_found_handling = "404-page"
